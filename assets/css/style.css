@@ -60,7 +60,7 @@ body {
 .centered {text-align: center}
 .mt {margin-top: 50px;}
 .mb {margin-bottom: 50px;}
-.mtb {margin-top: 50px; margin-bottom: 50px;}
+.mtb {margin-top: 30px; margin-bottom: 50px;}
 .mtb2 { margin-top: 100px; margin-bottom: 100px;}
 .ptb {padding-top: 80px; padding-bottom: 80px;}
 
@@ -162,13 +162,16 @@ input {
 	}
 
 .btn-conf-2 {
-	border-radius: 50px;
+	border-radius: 5px;
 	margin-right: 15px;
-	font-size: 11px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	padding: 12px 28px 11px 28px;
+	padding: 15px 28px 15px 28px;
 	margin-top: 20px;
+	font-weight: 300;
+    font-style: normal;
+    font-size: 17px;
+    letter-spacing: .25px;
 	}	
 
 .btn-green {
@@ -293,9 +296,9 @@ input {
 }
 
 #h h1 {
-	font-weight: 700;
+	font-weight: 300;
 	color: white;
-	font-size: 40px;
+	font-size: 46px;
 }
 
 /* Store Links */
