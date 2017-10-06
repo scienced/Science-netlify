@@ -31,6 +31,12 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
+h3 {
+	line-height: 1.4;
+
+
+}
+
 
 p { 
 	padding: 0; 
@@ -47,7 +53,13 @@ p {
 html,
 body {
 	height: 100%;
+  width: 100%;
 }
+
+img {
+    max-width: 100%;
+}
+
 
 .alignleft { float: left; }
 .alignright { float: right; }
@@ -58,7 +70,10 @@ body {
 	clear: both;
 }
 .centered {text-align: center}
-.mt {margin-top: 50px;}
+.mt {margin-top: 30px;}
+
+.space {margin-top: 50px;}
+
 .mb {margin-bottom: 50px;}
 .mtb {margin-top: 45px; margin-bottom: 50px;}
 .mtb2 { margin-top: 100px; margin-bottom: 100px;}
@@ -175,18 +190,36 @@ input {
 	}	
 
 .btn-green {
-	background: #00ab6b;
-	color: white
+	background: #00AB6A;
+	color: white;
+	}
+.btn-green:hover {
+	background: #00794c;
+	color: white;
 }
 
-.btn-blue {
-	background: #3b5998;
-	color: white
+
+.btn-trans {
+	background: none;
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	margin-right: 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding: 15px 28px 15px 28px;
+	margin-top: 20px;
+	font-weight: 300;
+    font-style: normal;
+    font-size: 17px;
+    letter-spacing: .25px;
+    width: 200px;
+
 }
 /* HEADER SECTION */
 #h {
 	
-	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../../assets/img/nasa.jpg) no-repeat center top;
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../../assets/img/sciencebbb.png) no-repeat center top;
 	padding-top: 70px;
 	padding-bottom: 20px;
 	text-align:center;
@@ -233,16 +266,41 @@ input {
     position: relative;
 }
 
-/* platform SECTION */
-#gl {
+/* 404 HEADER SECTION */
+#ty {
 	
-	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../../assets/img/glasgow.png) no-repeat center top;
-	padding-top: 120px;
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://media.giphy.com/media/Hd3GXtH7xs1CU/giphy-downsized.gif) no-repeat center top;
+	padding-top: 60px;
 	padding-bottom: 60px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
 	min-height: 400px;
+	width: 100%;
+	color: white;
+	
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative;
+}
+
+/* platform SECTION */
+#gl {
+	
+	background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url(../../assets/img/Science-bg-groen.png) no-repeat center top;
+	padding-top: 90px;
+	padding-bottom: 60px;
+	text-align:center;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 350px;
 	width: 100%;
 	color: white;
 	
@@ -307,15 +365,15 @@ input {
 	margin-top: 20px;
 }
 
-/* SEP */
+/* SEP old: background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../../assets/img/sd-memes4.jpg) no-repeat center top;*/
 #sep {
 	
-	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../../assets/img/amsterdam.jpg) no-repeat center top;
+	background: linear-gradient(90deg, #5c58a5, #1d86e0);
 	padding-top: 90px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 410px;
+	min-height: 330px;
 	width: 100%;
 	color: white;
 
@@ -443,6 +501,10 @@ ul {
 	color: #03C9A9;
 }
 
+#f p {
+	margin: 20px;
+}
+
 /* Partner posts */
 
 .p-story_content {
@@ -490,3 +552,217 @@ margin-bottom: 10px;
 .p-date {
 	color: #ccc;
 }
+
+/* rm style */
+.text-block {
+    padding: 30px 30px 0 20px;
+}
+.changing-image {
+    padding: 0 !important;
+}
+
+.hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity .7s;
+    -webkit-transition: opacity .7s;
+    -moz-transition: opacity .7s;
+    -ms-transition: opacity .7s;
+    -khtml-transition: opacity .7s;
+    -o-transition: opacity .7s;
+}
+
+.grey {
+    background-color: #FAFAFA;
+}
+
+.container {
+    max-width: 1083px;
+}
+
+.changing-image.right-image {
+    text-align: right;
+}
+
+.changing-image.left-image {
+    text-align: left;
+}
+
+.changing-image img {
+	    padding-left: 23px;
+    padding-right: 23px;
+	}
+
+@media (min-width: 768px) {
+	.changing-image img {
+	    max-width: 450px;
+	}
+	.text-block .left {
+    padding-right: 20%;
+}
+
+.text-block .right {
+    padding-left: 20%;
+}
+
+}
+
+@media (max-width: 768px) {
+
+	.left, .right {
+	    text-align: center !important;
+	    padding: 30px 20px;
+	}
+	#h h1 {
+		font-size: 33px;
+	}
+}
+
+@media (max-width: 992px) {
+
+	.text-block {
+    padding: 0 30px 0 20px;
+	}
+}
+
+.changing-image .hover-image:hover{opacity:100}
+.changing-image.right-image .hover-image{left:auto;right:0}
+
+section {
+    padding: 30px 0;
+}
+
+.text-block h3 {
+	margin-top: 0px;
+	font-weight: bold;
+}
+
+
+
+/* end rm style */
+
+/* arrow */
+
+.arrow_svg {
+    stroke-width: 1.2px;
+    stroke: #021064;
+    position: relative;
+    fill: transparent;
+    width: 20px;
+    height: 50px;
+}
+
+@media (min-width: 992px) {
+	.arrow_svg {
+	    width: 40px;
+	    height: 100px;
+	}
+}
+
+.arrow_svg, .close_svg {
+    stroke: #ffffff;
+}
+
+.arrow_down {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+
+
+/* FAQ style */
+.faq:hover
+{
+    cursor:pointer;
+}
+
+.faqheader {
+	margin-bottom: 20px;
+}
+
+/* pricing style */
+
+* {
+    box-sizing: border-box;
+}
+.title {
+  display: block;
+  font-size: 30px;
+  margin:15px 0 10px;
+  padding: 0;
+  text-align: center;
+}
+.sub-title {
+  display: block;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #111;
+  margin-bottom: 30px;
+  font-size: 14px;
+	margin-top: 13px;
+}
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.price:hover {
+    /* box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2) */
+}
+
+.price .header {
+    background-color: #111;
+    color: white;
+    font-size: 25px;
+}
+.bg-green{
+	background-color:#4CAF50 !important;
+	}
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.button {
+    
+    border: none;
+    color: #fff;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 4px;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: .25px;
+}
+
+.table-columns {
+	margin-bottom: 20px;
+}
+
+.tp{
+	margin-top: 29px;
+}
+
+/* thank you page */
+
+#ty h1 {
+    color: white;
+    font-size: 65px;
+}
+
