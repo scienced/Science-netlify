@@ -60,7 +60,7 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2 centered">
              <!--<img src="assets/img/sciencedump2.png" width="332" height="230" alt="sciencedump logo"> -->
-             <img src="assets/img/sciencedump2.png" width="332" height="auto" alt="sciencedump logo">
+             <img src="assets/img/sciencedump2.png" width="332" height="230" alt="sciencedump logo">
 
            <h1>The fun side of science straight on your social feed.</h1>
           
@@ -74,13 +74,13 @@
            
           </div>
         </div><!--/row-->
-        <div class="row"><div class="text-center arrow_down col-xs-12"> <a href="#who-we-are"> <svg version="1.1" class="arrow_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="100px" viewBox="0 0 20 50" enable-background="new 0 0 20 50" xml:space="preserve"> <polyline class="path" stroke-miterlimit="10" points="2.625,2.625 17.75,25 2.625,47.375 "></polyline> </svg> </a></div></div>
+        <div class="row"><div class="text-center arrow_down col-xs-12"> <a href="#" class="scroll-down"> <svg version="1.1" class="arrow_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="100px" viewBox="0 0 20 50" enable-background="new 0 0 20 50" xml:space="preserve"> <polyline class="path" stroke-miterlimit="10" points="2.625,2.625 17.75,25 2.625,47.375 "></polyline> </svg> </a></div></div>
 
 
       </div><!--/container-->
     </div><!-- /H -->
 
-    <div id="g">
+    <section id="g" class="ok">
     <div class="container">
       <div class="row centered">
         <div class="col-md-8 col-md-offset-2">
@@ -88,7 +88,7 @@
         </div>
       </div><!--/row-->
     </div><!--/container-->
-  </div> <!--/green-->
+  </section> <!--/green-->
 
     <section>
     <div class="container">
@@ -107,7 +107,7 @@
     </div>
   </section>
 
-      <section class="grey">
+  <section class="grey">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 text-block">
@@ -225,6 +225,14 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/retina-1.1.0.js"></script>
+    <script type="text/javascript">
+ $(function() {
+    $('.scroll-down').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
+</script>
 
 
 
