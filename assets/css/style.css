@@ -451,7 +451,7 @@ ul {
 	max-width: 140px;
 	max-height: 60px;
 	width: 100%;
-	
+
 
 	vertical-align: middle;
 	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
@@ -794,4 +794,105 @@ section {
     -ms-transform: translateY(-5px);
     transform: translateY(-5px);
   }
+}
+
+/* form page css */
+
+.form1{
+	padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 35px;
+    padding-top: 1px;
+    margin-top: 30px;
+    background-color: gainsboro;
+}
+
+.btn-submit {
+	background: #e40375;
+	color: white;
+	width: 100%;
+	margin-top: 20px;
+	text-transform: uppercase;
+	}
+.btn-submit:hover {
+	background: gray;
+	color: white;
+}
+
+.gl2 {
+	
+	background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url(https://www.blendb2b.com/hubfs/Intro_to_Inbound/Intro_to_B2B_Inbound_Book_mockup-2017edition.png?t=1508834977602) no-repeat center top;
+	padding-top: 90px;
+	padding-bottom: 60px;
+	text-align:center;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 350px;
+	width: 100%;
+	color: white;
+	
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative;
+}
+
+.gl2 h1 {
+	
+	color: white;
+	font-size: 65px;
+}
+.pers h3 {
+	font-weight: bold;
+}
+.pers ul li {
+
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    color: #666;
+}
+.pers ul {
+	list-style-type: circle;
+	    margin-left: 30px;
+}
+
+/*form aanjaag */
+
+.darkg {
+	background-color: #363636;
+}
+.darkg h3, .darkg p {
+	color: white;
+} 
+.darkg span {
+	color: #00AB6A;
+}
+
+.btn-orange {
+	background: #f59a23;
+	color: white;
+	
+	margin-top: 20px;
+	text-transform: uppercase;
+	}
+.btn-orange:hover {
+	background: gray;
+	color: white;
+}
+
+.text-block2 {
+    padding: 30px 30px 30px 20px;
+}
+
+.bmx {
+	margin-top: 25px;
 }
