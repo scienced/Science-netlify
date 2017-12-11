@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+
+    <!-- Buefy CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+
+    <!-- Buefy JavaScript -->
+    <script src="https://unpkg.com/buefy"></script>
+
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+
+    <!--vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- additional Vue components -->
+    <script src="vue-clipboard.min.js"></script>
+    <script src="URI.min.js"></script>
+
+  </head>
+  <body>
+  <div id="app"> 
+
+  <section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Sciencedump URL Builder
+      </h1>
+    </div>
+  </div>
+</section>
+
+
+
+  <selection class="section">
+    <div class="container">
+    <div class="columns">
+        <div class="column is-10 is-offset-1 notification">
+        
+
+
+        <!-- url input veld -->
+        <b-field  horizontal label="Website URL">
+            <b-input name="url2" expanded v-model="inputUrl" placeholder="https://www.inverse.com/article/38198-stephen-hawking-artificial-intelligence-danger" type="url"></b-input>
+        </b-field>
+
+
+
+
+        <!-- status messages-->
+
+
+        <b-message  has-icon :active.sync="isActiveInfo">
+            Fill out all the field above and a URL will be automatically generated for you below.
+        </b-message>
+
+        <b-message type="is-success" has-icon :active.sync="isActiveSuccess">
+            Wohoo! We successfully built your url for content partner <strong>{{partnerDomain}}</strong>.
+        </b-message>
+
+        <b-message type="is-danger" has-icon :active.sync="isActiveDanger">
+            Oops, something went wrong. Content partner (insert host here) was not recognized.
+        </b-message>
+
+        <!-- Result firld -->
+
+        <b-field horizontal label="Full UTM URL">
+            <b-input type="textarea" expanded readonly v-model="outputUrl"></b-input>   
+        </b-field>
+
+        <b-field horizontal>
+          <p class="control">
+                <button class="button is-primary" @click="doCopy" >Copy</button>
+          </p>
+        </b-field>
+
+
+        <!-- version tag -->
+
+        <b-taglist attached>
+          <b-tag type="is-dark">Version</b-tag>
+          <b-tag type="is-info">0.2</b-tag>
+        </b-taglist>
+
+
+        </div>
+      </div>
+
+    </div>  
+    </section>
+    
+
+
+
+   
+   </div> 
+
+
+
+<script type="text/javascript"> 
+
+
+Vue.use(Buefy.default);
+
+new Vue({
+  el: '#app',
+
+  data: {
+    name: 'basic-example',
+    isActiveDanger: false,
+    isActiveSuccess: false,
+    isActiveInfo: true,
+    partnerUrlItem:'',
+    inputUrl: '',
+    url:'',
+    contentPartners: [
+              {name: 'Boredpanda', domain: 'boredpanda.com', parameter: 'utm_source=Facebook&utm_medium=Branded+Content&utm_campaign=ScienceDump'}, 
+              {name: 'Brightside', domain: 'brightside.com', parameter: 'utm_source=fb_r927d07ba7111&utm_campaign=5a849d0be612&utm_medium=cpm'}, 
+              {name: 'ATI', domain: 'all-that-is-interesting.com', parameter: 'blbla3'},
+              {name: 'Inverse', domain: 'inverse.com', parameter: 'blbla4'}
+          ],
+  },
+
+  methods: {
+
+            doCopy() {
+              this.$toast.open({
+                    message: 'Copied to clipboard!',
+                    type: 'is-black'
+                })
+              this.$copyText(this.outputUrl)
+            },
+
+
+            },
+  computed:
+        {
+          
+          partnerDomain() {
+            this.url = new URI(this.inputUrl);
+            var item = this.contentPartners.find(item => item.domain === this.url.domain());
+            //console.log(this.url.domain());
+            if (item) {
+            this.partnerUrlItem = item;
+            console.log(item.name);
+            
+            this.isActiveInfo = false;
+            this.isActiveSuccess = true;
+            return item.name;
+            }
+
+          },
+          outputUrl: function () {
+            if(this.partnerUrlItem.name) {
+              var url = new URI(this.inputUrl);
+              this.url.normalize();
+              this.url.removeSearch(["utm_source", "utm_campaign", "utm_medium"]);
+              this.url.addQuery(this.partnerUrlItem.parameter);
+              //url.addQuery("utm_campaign=fbpdtol&utm_source=facebook&utm_medium=social");
+              return this.url.href();
+            }
+          }
+        }
+
+});
+
+</script>
+
+
+
+
+  </body>
+</html>
