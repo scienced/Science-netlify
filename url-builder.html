@@ -88,7 +88,7 @@
 
           <b-taglist attached>
             <b-tag type="is-dark">Version</b-tag>
-            <b-tag type="is-info">0.3</b-tag>
+            <b-tag type="is-info">0.4</b-tag>
           </b-taglist>
 
         </div>
@@ -177,15 +177,15 @@ new Vue({
             if(this.partnerUrlItem.name && this.partnerDomain != 'no partner detected') {
               //var url = new URI(this.inputUrl);
               this.url.normalize();
-              console.log (this.url.toString());
               this.url.removeSearch(["utm_source", "utm_campaign", "utm_medium"]);
-              var stringurl = this.url.toString();
-              console.log(stringurl.concat('?', this.partnerUrlItem.parameter));
-              this.combinedurl = new URI(stringurl.concat('?', this.partnerUrlItem.parameter));
-              //this.url.addQuery(this.partnerUrlItem.parameter);
-              this.combinedurl.normalize();
-              this.combinedurl.readable();
-              return this.combinedurl.toString();
+
+              var tempurl = 'http://www.sciencedump.com?' + this.partnerUrlItem.parameter; //temp url to extract the clean UTM parameters
+              var uri = new URI(tempurl); //temp URI object 
+              var data = uri.query(true); //json object with content partner UTM parameters
+              this.url.addQuery(data);  //add json to existing url
+              this.url.normalize();
+              //this.url.readable();
+              return this.url.toString();
 
             } else {
               return '';
