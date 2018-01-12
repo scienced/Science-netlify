@@ -178,7 +178,8 @@ input {
 
 .btn-conf-2 {
 	border-radius: 5px;
-	margin-right: 15px;
+	margin-right: 8px;
+	margin-left: 8px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	padding: 15px 28px 15px 28px;
@@ -204,7 +205,8 @@ input {
 	color: white;
 	border: 1px solid white;
 	border-radius: 5px;
-	margin-right: 15px;
+	margin-right: 8px;
+	margin-left: 8px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	padding: 15px 28px 15px 28px;
