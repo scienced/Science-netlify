@@ -110,11 +110,11 @@ a {
 	padding: 0;
 	margin: 0;
 	text-decoration: none; 
-	-webkit-transition: background-color .4s linear, color .4s linear;
-	-moz-transition: background-color .4s linear, color .4s linear;
+	-webkit-transition: background-color .25s linear, color .25s linear;
+	-moz-transition: background-color .25s linear, color .25s linear;
 	-o-transition: background-color .4s linear, color .4s linear;
 	-ms-transition: background-color .4s linear, color .4s linear;
-	transition: background-color .4s linear, color .4s linear;
+	transition: background-color .25s linear, color .25s linear;
 	color: #1abc9c;
 }
 a:hover,
@@ -191,7 +191,8 @@ input {
 	}	
 
 .btn-green {
-	background: #00AB6A;
+	background: #47b972;;
+
 	color: white;
 	}
 .btn-green:hover {
@@ -588,6 +589,7 @@ margin-bottom: 10px;
 
 .changing-image.right-image {
     text-align: right;
+    overflow: hidden;
 }
 
 .changing-image.left-image {
@@ -601,7 +603,7 @@ margin-bottom: 10px;
 
 @media (min-width: 768px) {
 	.changing-image img {
-	    max-width: 450px;
+	    max-width: 425px;
 	}
 	.text-block .left {
     padding-right: 20%;
@@ -897,4 +899,5 @@ section {
 
 .bmx {
 	margin-top: 25px;
+	overflow: hidden;
 }
