@@ -872,7 +872,10 @@ section {
 /*form aanjaag */
 
 .darkg {
-	background-color: #363636;
+	/*background-color: #363636;*/
+	background-color: #103447;
+    background-image: url(../../assets/img/cta-bg.svg);
+    background-size: cover;
 }
 .darkg h3, .darkg p {
 	color: white;
