@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>Daytrader</title>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+
+    <!-- custom style Tol-->
+    <link href="assets/fonts/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+    <style type="text/css">
+      .main-table {
+        margin-top: 50px;
+      }
+    </style>
+
+
+
+  </head>
+
+  <body>
+
+    <!-- Application root element -->
+    <div id="app">
+
+      
+      <!-- Nav Bar  -->
+      <b-navbar toggleable="md" type="dark" variant="info">
+
+          <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+          <b-navbar-brand href="#"><span class="oi oi-aperture"></span> Daytrader</b-navbar-brand>
+
+          <b-collapse is-nav id="nav_collapse">
+          <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right>
+                <!-- Using button-content slot -->
+                <template slot="button-content">
+                  <em> <span class="oi oi-person"></span> Larsen</em>
+                </template>
+                <b-dropdown-item href="#">Profile</b-dropdown-item>
+                <b-dropdown-item href="#">Signout</b-dropdown-item>
+              </b-nav-item-dropdown>
+            </b-navbar-nav>
+
+          </b-collapse>
+        </b-navbar>
+
+
+
+      <!-- Main Table -->
+      <b-container class="main-table">
+
+       <b-row>
+        <b-col sm="2"><h2>{{ selected }}</h2></b-col>
+        <b-col sm="2">
+            <b-form-select v-model="selected" :options="options" class="mb-3" />
+
+        </b-col>
+    </b-row>
+
+      
+
+        <template>
+          <b-table striped responsive :fields="fields" :items="items">
+
+          <template slot="index" slot-scope="data">
+             {{data.index + 1}}
+          </template>
+
+          <template slot="name" slot-scope="data">
+            {{data.item.first_name}} {{data.item.last_name}}
+          </template>
+
+          </b-table>
+
+        </template>
+       </b-container>
+
+
+
+
+      <!-- input form -->
+      <b-container class="main-table">
+        <template>
+  <div>
+    <b-form inline>
+
+    
+
+
+      <label class="mr-sm-2" for="inlineFormCustomSelectPref">Add Transaction: </label>
+      <b-form-input v-model="text1" class="mb-2 mr-sm-2 mb-sm-0"
+                  type="text"
+                  placeholder="Counterparty Name"></b-form-input>
+
+     
+      <b-form-input v-model="sell" class="mb-2 mr-sm-2 mb-sm-0"
+                  type="number"
+                  placeholder="Sell ammount"></b-form-input>
+
+      
+      <b-form-input v-model="buy" class="mb-2 mr-sm-2 mb-sm-0"
+                  type="number"
+                  placeholder="Buy ammount"></b-form-input>
+
+     
+      <b-form-input v-model="rate" class="mb-2 mr-sm-2 mb-sm-0"
+                  type="number"
+                  placeholder="Rate"></b-form-input>
+
+      
+      <b-button variant="primary">+ Add</b-button>
+    </b-form>
+  </div>
+</template>
+      </b-container>
+
+
+
+    </div>
+
+    <!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: "#app",
+        data: {
+          selected: 'USD-EUR',
+          fields: ['index',{ key: 'name', label: 'Trader' }, 'counterparty','buy','sell','rate'],
+          items: [
+            { isActive: true, counterparty: 'Rabobank', first_name: 'Dickerson', last_name: 'Macdonald', buy: 500, sell: 0, rate: 1.4 },
+            { isActive: false, counterparty: 'Bunq', first_name: 'Larsen', last_name: 'Shaw', buy: 200, sell: 0, rate: 1.1 },
+            { isActive: false, counterparty: 'Company X', first_name: 'Geneva', last_name: 'Wilson', buy: 0, sell: 9000, rate: 1.4},
+            { isActive: true, counterparty: 'Abn-amro', first_name: 'Jami', last_name: 'Carney', buy: 0, sell: 150, rate: 1.0 }
+          ],
+          options: [
+        { value: 'USD-EUR', text: 'USD-EUR' },
+        { value: 'GBP-USD', text: 'GBP-USD' },
+        { value: 'GBP-EUR', text: 'GBP-EUR' },
+        { value: 'ROE-EUT', text: 'ROE-EUT' },
+        { value: 'd', text: 'AUD-EUR', disabled: true }
+      ]
+        },
+        computed: {
+          showAlert() {
+            return this.name.length > 4 ? true : false;
+          }
+        }
+      })
+
+
+    </script>
+
+  </body>
+</html>
