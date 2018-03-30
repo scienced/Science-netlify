@@ -46,7 +46,7 @@
 
       
       <!-- Nav Bar  -->
-      <b-navbar toggleable="md" type="dark" variant="info">
+      <b-navbar toggleable="md" type="dark" variant="secondary">
 
           <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -72,13 +72,31 @@
         <!--table-toolbar -->
         <div class="dash-toolbar mt-4 clearfix">
           <div class="container">
+            <div class="float-left">
+               <b-dropdown id="ddown2" text="USD-EUR" variant="outline-secondary">
+                <b-dropdown-header>Select Book</b-dropdown-header>
+                  <b-dropdown-item>USD-EUR</b-dropdown-item>
+                  <b-dropdown-item>GBP-USD</b-dropdown-item>
+                  <b-dropdown-item>USD-JPY</b-dropdown-item>
+                  <b-dropdown-divider></b-dropdown-divider>
+                  <b-dropdown-item>Something else here...</b-dropdown-item>
+                  <b-dropdown-item disabled>Disabled action</b-dropdown-item>
+                </b-dropdown>
+             </div> 
+
+
+
             <div class="float-right">
               <div class="mr-3 d-inline">
-                <span><a href="#" class="btn btn-icon pr-1 ion-monitor bs-tether-target bs-tether-enabled bs-tether-element-attached-top bs-tether-element-attached-center bs-tether-target-attached-bottom bs-tether-target-attached-center"><span class="base-font ml-2">Day Details</span></a>
+                <span><a href="#" class="btn btn-icon pr-1 ion-monitor bs-tether-target bs-tether-enabled bs-tether-element-attached-top bs-tether-element-attached-center bs-tether-target-attached-bottom bs-tether-target-attached-center"><span class="base-font ml-2 d-none d-md-block">Hide summary</span></a>
                 </span>
               </div>
-              <b-btn :size="lg" :variant="success" v-b-modal.modal1>Add Transaction</b-btn>
-            </div></div></div>
+              <b-button variant="success" v-b-modal.modal1>Add Transaction</b-button>
+            </div>
+
+
+          </div>
+        </div>
 
 
 
@@ -87,34 +105,31 @@
 
           
           <div class="row">
-            <div class="col-sm">
-              <b-row>
-        <b-col sm="6"><h2>{{ selected }}</h2></b-col>
-        <b-col sm="6">
-            <b-form-select v-model="selected" :options="options" class="mb-3" />
-
-        </b-col>
-    </b-row>
+           
+            <div class="col-sm pl-3 mt-2">
+              Opening Postition: $340 <br>
+              Opening Rate: 1.34
+            
+              
               
 
             </div>
-            <div class="col-sm">
-              Opening Postition: $340<br>
-              Opening Rate: 1.34<br>
-              
-
-            </div>
-            <div class="col-sm">
+            <div class="col-sm mt-2">
               Running Postition: $340<br>
               Running average Rate: 1.34 <br>
               Running P/L: $450
+            </div>
+            <div class="col-sm mt-2">
+              EoD Postition: $340<br>
+              EoD average Rate: 1.34 <br>
+              EoD P/L: <strong>$690</strong>
             </div>
           </div>
         </b-card>
       </b-container>
 
       <!-- Main Table -->
-      <b-container class="main-table">
+      <b-container class="mt-3">
 
        
 
@@ -128,7 +143,8 @@
           </template>
 
           <template slot="name" slot-scope="data">
-            {{data.item.first_name}} {{data.item.last_name}}
+            {{data.item.first_name.charAt(0).toUpperCase()}}{{data.item.last_name.charAt(0).toUpperCase()}}
+           
           </template>
 
           </b-table>
@@ -139,41 +155,65 @@
 
 
 
-      <!-- input form -->
+      <!-- input modal -->
 
 
-      <b-modal id="modal1" title="Bootstrap-Vue">
+      <b-modal id="modal1" title="USD-EUR Transaction" :cancel-disabled='true'>
     <b-container>
         <template>
   <div>
 
-    <b-form inline>
+    <b-form>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                description="Who are you dealing with (autocomplete field)"
+                label="Counterparty"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                description="How much are you selling"
+                label="Sell amount"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal" type="number"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                description="How much are you buying"
+                label="Buy amount"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal" type="number"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                description="What is teh exchange rate"
+                label="Rate"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal" type="number"></b-form-input>
+      </b-form-group>
+
+
+
+
 
     
 
 
-      <label class="mr-sm-2" for="inlineFormCustomSelectPref">Add Transaction: </label>
-      <b-form-input v-model="text1" class="mb-2 mr-sm-2 mb-sm-0"
-                  type="text"
-                  placeholder="Counterparty Name"></b-form-input>
 
-     
-      <b-form-input v-model="sell" class="mb-2 mr-sm-2 mb-sm-0"
-                  type="number"
-                  placeholder="Sell ammount"></b-form-input>
 
-      
-      <b-form-input v-model="buy" class="mb-2 mr-sm-2 mb-sm-0"
-                  type="number"
-                  placeholder="Buy ammount"></b-form-input>
-
-     
-      <b-form-input v-model="rate" class="mb-2 mr-sm-2 mb-sm-0"
-                  type="number"
-                  placeholder="Rate"></b-form-input>
-
-      
-      <b-button variant="primary">+ Add</b-button>
     </b-form>
   </div>
 </template>
@@ -194,7 +234,7 @@
         el: "#app",
         data: {
           selected: 'USD-EUR',
-          fields: ['index',{ key: 'name', label: 'Trader' }, 'counterparty','buy','sell','rate'],
+          fields: [{ key: 'name', label: 'Trader' }, 'counterparty','buy','sell','rate'],
           items: [
             { isActive: true, counterparty: 'Rabobank', first_name: 'Dickerson', last_name: 'Macdonald', buy: 500, sell: 0, rate: 1.4 },
             { isActive: false, counterparty: 'Bunq', first_name: 'Larsen', last_name: 'Shaw', buy: 200, sell: 0, rate: 1.1 },
