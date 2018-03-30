@@ -25,6 +25,14 @@
       .main-table {
         margin-top: 50px;
       }
+      .question-badge {
+    display: inline-block;
+    vertical-align: sub;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-image: url(https://app.checklyhq.com/static/images/icons/svg/question-mark.svg);
+  }
     </style>
 
 
@@ -61,22 +69,59 @@
         </b-navbar>
 
 
+        <!--table-toolbar -->
+        <div class="dash-toolbar mt-4 clearfix">
+          <div class="container">
+            <div class="float-right">
+              <div class="mr-3 d-inline">
+                <span><a href="#" class="btn btn-icon pr-1 ion-monitor bs-tether-target bs-tether-enabled bs-tether-element-attached-top bs-tether-element-attached-center bs-tether-target-attached-bottom bs-tether-target-attached-center"><span class="base-font ml-2">Day Details</span></a>
+                </span>
+              </div>
+              <b-btn :size="lg" :variant="success" v-b-modal.modal1>Add Transaction</b-btn>
+            </div></div></div>
 
-      <!-- Main Table -->
-      <b-container class="main-table">
 
-       <b-row>
-        <b-col sm="2"><h2>{{ selected }}</h2></b-col>
-        <b-col sm="2">
+
+        <b-container class="mt-1">
+        <b-card class="">
+
+          
+          <div class="row">
+            <div class="col-sm">
+              <b-row>
+        <b-col sm="6"><h2>{{ selected }}</h2></b-col>
+        <b-col sm="6">
             <b-form-select v-model="selected" :options="options" class="mb-3" />
 
         </b-col>
     </b-row>
+              
+
+            </div>
+            <div class="col-sm">
+              Opening Postition: $340<br>
+              Opening Rate: 1.34<br>
+              
+
+            </div>
+            <div class="col-sm">
+              Running Postition: $340<br>
+              Running average Rate: 1.34 <br>
+              Running P/L: $450
+            </div>
+          </div>
+        </b-card>
+      </b-container>
+
+      <!-- Main Table -->
+      <b-container class="main-table">
+
+       
 
       
 
         <template>
-          <b-table striped responsive :fields="fields" :items="items">
+          <b-table small responsive :fields="fields" :items="items">
 
           <template slot="index" slot-scope="data">
              {{data.index + 1}}
@@ -95,9 +140,13 @@
 
 
       <!-- input form -->
-      <b-container class="main-table">
+
+
+      <b-modal id="modal1" title="Bootstrap-Vue">
+    <b-container>
         <template>
   <div>
+
     <b-form inline>
 
     
@@ -129,6 +178,11 @@
   </div>
 </template>
       </b-container>
+  </b-modal>
+
+      
+
+    
 
 
 
