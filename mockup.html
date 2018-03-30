@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel=icon type=image/png href=https://app.checklyhq.com/static/images/racoon_favicon.png>
 
-    <title>Daytrader</title>
+    <title>Forexly</title>
 
     <!-- Required Stylesheets -->
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
@@ -18,22 +19,9 @@
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 
 
-    <!-- custom style Tol-->
+    <!-- custom Tol-->
     <link href="assets/fonts/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-
-    <style type="text/css">
-      .main-table {
-        margin-top: 50px;
-      }
-      .question-badge {
-    display: inline-block;
-    vertical-align: sub;
-    width: 16px;
-    height: 16px;
-    background-repeat: no-repeat;
-    background-image: url(https://app.checklyhq.com/static/images/icons/svg/question-mark.svg);
-  }
-    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 
@@ -48,17 +36,22 @@
       <!-- Nav Bar  -->
       <b-navbar toggleable="md" type="dark" variant="secondary">
 
-          <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+          
 
-          <b-navbar-brand href="#"> <img src="https://app.checklyhq.com/static/images/racoon_logo.svg" width="32px" style="margin-right: 10px;">Rately</b-navbar-brand>
+          <b-navbar-brand href="#"> <img src="https://app.checklyhq.com/static/images/racoon_logo.svg" width="32px" style="margin-right: 10px;">Forexly </b-navbar-brand>
 
           <b-collapse is-nav id="nav_collapse">
+
+           <b-navbar-nav>
+          <b-nav-text>A Forex Trade Log</b-nav-text>
+        </b-navbar-nav>
+
           <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
                 <!-- Using button-content slot -->
                 <template slot="button-content">
-                  <em> <span class="oi oi-person"></span> Larsen</em>
+                  Larsen
                 </template>
                 <b-dropdown-item href="#">Profile</b-dropdown-item>
                 <b-dropdown-item href="#">Signout</b-dropdown-item>
@@ -66,6 +59,7 @@
             </b-navbar-nav>
 
           </b-collapse>
+          <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         </b-navbar>
 
 
@@ -73,8 +67,8 @@
         <div class="dash-toolbar mt-4 clearfix">
           <div class="container">
             <div class="float-left">
-               <b-dropdown id="ddown2" text="USD-EUR" variant="outline-secondary">
-                <b-dropdown-header>Select Book</b-dropdown-header>
+               <b-dropdown class="d-inline" id="ddown2" text="EUR-USD" variant="outline-secondary">
+                <b-dropdown-header>Select Currency Pair</b-dropdown-header>
                   <b-dropdown-item>USD-EUR</b-dropdown-item>
                   <b-dropdown-item>GBP-USD</b-dropdown-item>
                   <b-dropdown-item>USD-JPY</b-dropdown-item>
@@ -82,6 +76,7 @@
                   <b-dropdown-item>Something else here...</b-dropdown-item>
                   <b-dropdown-item disabled>Disabled action</b-dropdown-item>
                 </b-dropdown>
+                
              </div> 
 
 
@@ -91,7 +86,7 @@
                 <span><a href="#" class="btn btn-icon pr-1 ion-monitor bs-tether-target bs-tether-enabled bs-tether-element-attached-top bs-tether-element-attached-center bs-tether-target-attached-bottom bs-tether-target-attached-center"><span class="base-font ml-2 d-none d-md-block">Hide summary</span></a>
                 </span>
               </div>
-              <b-button variant="success" v-b-modal.modal1>Add Transaction</b-button>
+              <b-button class="d-inline" variant="success" v-b-modal.modal1>Add a trade</b-button>
             </div>
 
 
@@ -100,29 +95,30 @@
 
 
 
-        <b-container class="mt-1">
+        <b-container class="mt-2">
         <b-card class="">
 
           
           <div class="row">
            
-            <div class="col-sm pl-3 mt-2">
-              Opening Postition: $340 <br>
-              Opening Rate: 1.34
+            <div class="col-sm ">
+              Date: <strong>31/3/2018</strong> <br>
+              Opening Postition: 1500 <br>
+              Opening Rate: 1.3
             
               
               
 
             </div>
-            <div class="col-sm mt-2">
-              Running Postition: $340<br>
+            <div class="col-sm">
+              Running Postition: 1340<br>
               Running average Rate: 1.34 <br>
-              Running P/L: $450
+              Running P/L: €450
             </div>
-            <div class="col-sm mt-2">
-              EoD Postition: $340<br>
+            <div class="col-sm">
+              EoD Postition: 2340<br>
               EoD average Rate: 1.34 <br>
-              EoD P/L: <strong>$690</strong>
+              EoD P/L: <strong>€690</strong>
             </div>
           </div>
         </b-card>
@@ -147,6 +143,15 @@
            
           </template>
 
+          <template slot="show_details" slot-scope="row">
+            <!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
+            <b-link size="sm" @click.stop="row.toggleDetails" class="mr-2" href="#foo" v-b-tooltip.hover title="Edit or delete this trade">
+            Edit
+            </b-link>
+           </template> 
+
+        
+
           </b-table>
 
         </template>
@@ -158,7 +163,7 @@
       <!-- input modal -->
 
 
-      <b-modal id="modal1" title="USD-EUR Transaction" :cancel-disabled='true'>
+      <b-modal id="modal1" title="EUR-USD Trade" :cancel-disabled='true'>
     <b-container>
         <template>
   <div>
@@ -169,7 +174,6 @@
                 horizontal
                 :label-cols="3"
                 breakpoint="md"
-                description="Who are you dealing with (autocomplete field)"
                 label="Counterparty"
                 label-for="inputHorizontal">
         <b-form-input id="inputHorizontal"></b-form-input>
@@ -179,8 +183,17 @@
                 horizontal
                 :label-cols="3"
                 breakpoint="md"
+                label="Broker"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
                 
-                label="Sell amount"
+                label="Sell"
                 label-for="inputHorizontal">
         <b-form-input id="inputHorizontal" type="number"></b-form-input>
       </b-form-group>
@@ -190,7 +203,7 @@
                 :label-cols="3"
                 breakpoint="md"
                
-                label="Buy amount"
+                label="Buy"
                 label-for="inputHorizontal">
         <b-form-input id="inputHorizontal" type="number"></b-form-input>
       </b-form-group>
@@ -233,9 +246,11 @@
       window.app = new Vue({
         el: "#app",
         data: {
-          selected: 'USD-EUR',
-          fields: [{ key: 'name', label: 'Trader' }, 'counterparty','buy','sell','rate'],
+          
+          status: '',
+          fields: [{ key: 'name', label: 'Trader' }, 'counterparty','buy','sell','rate',{ key: 'show_details', label: '' }],
           items: [
+            { isActive: true, counterparty: 'Opening (rollover from 30/3/2018)', first_name: 'A', last_name: 'I', buy: 1500, sell: 0, rate: 1.3 },
             { isActive: true, counterparty: 'Rabobank', first_name: 'Dickerson', last_name: 'Macdonald', buy: 500, sell: 0, rate: 1.4 },
             { isActive: false, counterparty: 'Bunq', first_name: 'Larsen', last_name: 'Shaw', buy: 200, sell: 0, rate: 1.1 },
             { isActive: false, counterparty: 'Company X', first_name: 'Geneva', last_name: 'Wilson', buy: 0, sell: 9000, rate: 1.4},
