@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel=icon type=image/png href=https://app.checklyhq.com/static/images/racoon_favicon.png>
+
+    <title>EUR-USD Forexly</title>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+
+    <!-- custom Tol-->
+    <link href="assets/fonts/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+  </head>
+
+  <body>
+
+    <!-- Application root element -->
+    <div id="app">
+
+      
+      <!-- Nav Bar  -->
+      <b-navbar toggleable="md" type="dark" variant="secondary">
+
+          
+
+          <b-navbar-brand href="#"> <img src="https://app.checklyhq.com/static/images/racoon_logo.svg" width="32px" style="margin-right: 10px;">Forexly </b-navbar-brand>
+
+          <b-collapse is-nav id="nav_collapse">
+
+           <b-navbar-nav>
+          <b-nav-text>A Forex Trade Log</b-nav-text>
+        </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+              <b-nav-item href="input.html">Input</b-nav-item>
+            <b-nav-item href="mockup.html">Analysis</b-nav-item>
+
+
+            <b-nav-item-dropdown right>
+                <!-- Using button-content slot -->
+                <template slot="button-content">
+                  Martijn
+                </template>
+                <b-dropdown-item href="#">Profile</b-dropdown-item>
+              
+                <b-dropdown-item href="#">Signout</b-dropdown-item>
+              </b-nav-item-dropdown>
+            </b-navbar-nav>
+
+          </b-collapse>
+          <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+        </b-navbar>
+
+
+        <!--table-toolbar -->
+        <div class="dash-toolbar mt-5 clearfix">
+          <div class="container">
+
+            <div class="float-left">
+               <h3>Your 50 latest trades</h3>
+                
+             </div> 
+
+           
+
+
+            <div class="float-right">
+              
+              <b-button class="d-inline" variant="success" v-b-modal.modal1>Add a trade</b-button>
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+      <!-- Main Table -->
+      <b-container class="mt-3">
+
+       
+
+      
+
+        <template>
+          <b-table small responsive :fields="fields" :items="items">
+
+          <template slot="index" slot-scope="data">
+             {{data.index + 1}}
+          </template>
+
+          <template slot="name" slot-scope="data">
+            {{data.item.first_name.charAt(0).toUpperCase()}}{{data.item.last_name.charAt(0).toUpperCase()}}
+           
+          </template>
+
+          <template slot="show_details" slot-scope="row">
+            <!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
+            <b-link size="sm" @click.stop="row.toggleDetails" class="mr-2" href="#foo" v-b-tooltip.hover title="Edit or delete this trade">
+            Edit
+            </b-link>
+           </template> 
+
+        
+
+          </b-table>
+
+        </template>
+
+      
+
+        
+
+
+
+       </b-container>
+
+
+
+
+      <!-- input modal -->
+
+
+      <b-modal id="modal1" title="Log a trade confirmation" hide-footer>
+    <b-container>
+    
+  <div>
+
+    <b-form>
+
+    <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                label="Date"
+                label-for="inputHorizontal">
+        <b-form-input v-model="dateSelected" type="date" readonly>
+          
+
+        </b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                label="Trader"
+                label-for="inputHorizontal">
+                <b-form-select v-model="traderSelected" :options="traderyOptions" class="mb-3" readonly>
+                  <option value="Martijn">Martijn</option>
+                  <option value="Will" disabled>Will</option>
+                  <option value="Henko" disabled>Henko</option>
+               
+                </b-form-select>
+    </b-form-group>
+
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                label="Book"
+                label-for="inputHorizontal">
+                <b-form-select v-model="selected" class="mb-3">
+                  <option :value="null">Please select an option</option>
+                  <option value="a">227</option>
+                  <option value="a">228</option>
+                  <option value="a">229</option>
+                  <option value="b" disabled>330 </option>  
+                </b-form-select>
+    </b-form-group>
+
+    <b-form-group id="ccy-input"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                label="Currency pair"
+                label-for="inputHorizontal">
+
+                <b-form-select v-model="ccySelected" :options="ccyOptions" class="mb-3">
+                    
+              
+    </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                label="Counterparty"
+                label-for="inputHorizontal"
+                placeholder="please select an option">
+        <b-form-select  class="mb-3">
+                  
+                  <option value="a">Velocity</option>
+                  <option value="b">Option</option>  
+                </b-form-select>
+    </b-form-group>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                
+                label="Sell"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal" type="number"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+               
+                label="Buy"
+                label-for="inputHorizontal">
+        <b-form-input id="inputHorizontal" type="number"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="fieldsetHorizontal"
+                horizontal
+                :label-cols="3"
+                breakpoint="md"
+                
+                label="Rate"
+                label-for="inputHorizontal"
+              
+                >
+        <b-form-input id="inputlive" 
+                      v-model="tradeRate"
+                      type="number"
+                      :state="rateState"
+                      ></b-form-input>
+
+        <b-form-invalid-feedback id="inputLiveFeedback">
+          <!-- This will only be shown if the preceeding input has an invalid state -->
+          Rate may not diviate more than 10% from live rate
+        </b-form-invalid-feedback>
+            
+
+        <small id="fieldsetHorizontal__BV_description_" class="form-text text-muted">EUR-USD Rate: <strong>{{liveRate}}</strong> (updated: {{liveRatetime}}, source: fixer.io)</small>
+
+      </b-form-group>
+
+
+
+
+
+    
+
+
+
+
+    </b-form>
+  </div>
+
+<b-btn class="mt-3" variant="outline-success" block @click="hideModal">Add Trade</b-btn>
+      </b-container>
+  </b-modal>
+
+      
+
+    
+
+
+
+    </div>
+
+    <!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: "#app",
+        data: {
+          
+          status: '',
+          fields: [ 'Book', 'Date', 'CCY', { key: 'name', label: 'Trader' },'counterparty',{ key: 'buy', label: 'Buy' },{ key: 'sell', label: 'Sell' },'rate',{ key: 'show_details', label: '' }],
+          items: [
+            { Book: 228, Date: '9-4-18', CCY: 'EUR-USD', counterparty: 'Option', first_name: 'A', last_name: 'I', buy: 150000, sell: 0, rate: 1.323 },
+            { Book: 228, Date: '9-4-18', CCY: 'EUR-USD', counterparty: 'Velocity', first_name: 'Dickerson', last_name: 'Macdonald', buy: 500, sell: 0, rate: 1.4 },
+            { Book: 228, Date: '9-4-18', CCY: 'EUR-USD', counterparty: 'Option', first_name: 'Larsen', last_name: 'Shaw', buy: 200, sell: 0, rate: 1.1 },
+            { Book: 228, Date: '9-4-18', CCY: 'EUR-USD', counterparty: 'Velocity', first_name: 'Geneva', last_name: 'Wilson', buy: 0, sell: 9000, rate: 1.4},
+            { Book: 228, Date: '9-4-18', CCY: 'EUR-USD', counterparty: 'Veleocity', first_name: 'Jami', last_name: 'Carney', buy: 0, sell: 150, rate: 1.0 }
+          ],
+          traderSelected: 'Martijn',
+          dateSelected: '12/04/2018',
+          ccySelected: '',
+          ccyOptions: [
+        { value: 'USD-EUR', text: 'USD-EUR' },
+        { value: 'GBP-USD', text: 'GBP-USD' },
+        { value: 'GBP-EUR', text: 'GBP-EUR' },
+        { value: 'ROE-EUT', text: 'ROE-EUT' },
+        { value: 'd', text: 'AUD-EUR', disabled: true }
+      ],
+      liveRate: '' ,
+      liveRatetime: '' ,
+      loading: false,
+      tradeRate: '',
+        },
+
+        methods: {
+    getJokes: function () {
+      this.loading = true;
+      axios.get("http://data.fixer.io/api/latest?access_key=878fc26d65b598e25cc22a5fa6384135&format=1")
+      .then((response)  =>  {
+        console.log(response.data);
+        this.loading = false;
+        this.liveRate = response.data.rates.USD;
+        this.liveRatetime = Date(response.data.timestamp);
+      }, (error)  =>  {
+        this.loading = false;
+      })
+    }
+  },
+  mounted(){
+  this.getJokes();
+ },
+
+        computed: {
+          showAlert() {
+            return this.name.length > 4 ? true : false;
+          },
+          rateState () {
+            return this.tradeRate.length > 2 ? true : false
+          }
+        }
+      })
+
+
+    </script>
+
+  </body>
+</html>
