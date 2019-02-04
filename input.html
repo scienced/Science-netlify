@@ -72,7 +72,7 @@
         <div class="dash-toolbar mt-4 clearfix">
           <div class="container">
 
-             <b-alert 
+             <b-alert show
                       dismissible
                       variant="danger"
 
@@ -85,7 +85,7 @@
 
             </b-alert>
 
-            <b-alert  show
+            <b-alert  
                       dismissible
                       variant="success"
 
@@ -102,8 +102,8 @@
 
 
 
-
-
+<!-- Table header -->
+<div class="mt-3">
             <div class="float-left">
                <h4>Your 50 latest trades</h4>
                 
@@ -121,6 +121,7 @@
           </div>
         </div>
 
+</div>
 
 
       <!-- Main Table -->
@@ -130,7 +131,7 @@
 
       
 
-        <template>
+
           <b-table small responsive :fields="fields" :items="items">
 
           <template slot="index" slot-scope="data">
@@ -153,7 +154,7 @@
 
           </b-table>
 
-        </template>
+       
        </b-container>
 
 
